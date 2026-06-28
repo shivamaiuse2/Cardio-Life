@@ -1,6 +1,6 @@
 {
-    "name": "cardio_life",
-    "short_name": "cardio_life",
+    "name": "cardiolife",
+    "short_name": "cardiolife",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

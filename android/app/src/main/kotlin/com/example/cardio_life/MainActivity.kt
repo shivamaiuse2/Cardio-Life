@@ -1,4 +1,4 @@
-package com.example.cardio_life
+package com.example.cardiolife
 
 import io.flutter.embedding.android.FlutterActivity
 
