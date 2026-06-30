@@ -51,7 +51,6 @@ class _DoctorsScreenState extends State<DoctorsScreen> {
           ),
           Expanded(
             child: ListView.builder(
-              padding: const EdgeInsets.all(16),
               itemCount: filtered.length,
               itemBuilder: (context, i) {
                 final d = filtered[i];

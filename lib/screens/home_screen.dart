@@ -83,11 +83,14 @@ class HomeScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: Colors.red[300],
                                 shape: BoxShape.circle,
-                                border: Border.all(color: Colors.white, width: 2),
+                                border:
+                                    Border.all(color: Colors.white, width: 2),
                               ),
                               child: const Center(
                                 child: Text('2',
-                                    style: TextStyle(fontSize: 8, color: Colors.white,
+                                    style: TextStyle(
+                                        fontSize: 8,
+                                        color: Colors.white,
                                         fontWeight: FontWeight.bold)),
                               ),
                             ),
@@ -101,20 +104,25 @@ class HomeScreen extends StatelessWidget {
                   GestureDetector(
                     onTap: () => Navigator.pushNamed(context, '/search'),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 14),
                       decoration: BoxDecoration(
                         color: Colors.white.withValues(alpha: (0.15)),
                         borderRadius: BorderRadius.circular(14),
-                        border: Border.all(color: Colors.white.withValues(alpha: (0.2)),
-                      ),),
+                        border: Border.all(
+                          color: Colors.white.withValues(alpha: (0.2)),
+                        ),
+                      ),
                       child: Row(
                         children: [
                           Icon(Icons.search_rounded,
-                              color: Colors.white.withValues(alpha: (0.7)), size: 20),
+                              color: Colors.white.withValues(alpha: (0.7)),
+                              size: 20),
                           const SizedBox(width: 10),
                           Text('Search doctors, services...',
                               style: TextStyle(
-                                  color: Colors.white.withValues(alpha: (0.6)), fontSize: 14)),
+                                  color: Colors.white.withValues(alpha: (0.6)),
+                                  fontSize: 14)),
                         ],
                       ),
                     ),
@@ -126,7 +134,7 @@ class HomeScreen extends StatelessWidget {
 
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.all(20),
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -138,8 +146,9 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 14),
                   SizedBox(
-                    height: 110,
+                    height: 120,
                     child: ListView.separated(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
                       scrollDirection: Axis.horizontal,
                       itemCount: AppData.healthMetrics.length,
                       separatorBuilder: (_, __) => const SizedBox(width: 12),
@@ -152,40 +161,46 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Quick actions
-                  const Text('Quick Actions',
-                      style: TextStyle(
-                          fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textDark)),
+                  // const Text('Quick Actions',
+                  //     style: TextStyle(
+                  //         fontSize: 16, fontWeight: FontWeight.w600, color: AppColors.textDark)),
+                  const SectionHeader(
+                    title: 'Quick Actions',
+                  ),
                   const SizedBox(height: 14),
-                  Row(
-                    children: [
-                      _QuickAction(
-                        icon: Icons.calendar_month_rounded,
-                        label: 'Book\nAppointment',
-                        color: AppColors.primary,
-                        onTap: () => Navigator.pushNamed(context, '/book'),
-                      ),
-                      const SizedBox(width: 12),
-                      _QuickAction(
-                        icon: Icons.science_outlined,
-                        label: 'Lab\nTests',
-                        color: const Color(0xFF1565C0),
-                        onTap: () => Navigator.pushNamed(context, '/book'),
-                      ),
-                      const SizedBox(width: 12),
-                      _QuickAction(
-                        icon: Icons.medical_information_outlined,
-                        label: 'My\nReports',
-                        color: const Color(0xFF2E7D32),
-                        onTap: () => Navigator.pushNamed(context, '/reports'),
-                      ),
-                      const SizedBox(width: 12),
-                      _QuickAction(
-                        icon: Icons.emergency_outlined,
-                        label: 'Emergency',
-                        color: const Color(0xFFE65100),
-                        onTap: () => _showEmergency(context),
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      children: [
+                        _QuickAction(
+                          icon: Icons.calendar_month_rounded,
+                          label: 'Book\nAppointment',
+                          color: AppColors.primary,
+                          onTap: () => Navigator.pushNamed(context, '/book'),
+                        ),
+                        const SizedBox(width: 12),
+                        _QuickAction(
+                          icon: Icons.science_outlined,
+                          label: 'Lab\nTests',
+                          color: const Color(0xFF1565C0),
+                          onTap: () => Navigator.pushNamed(context, '/book'),
+                        ),
+                        const SizedBox(width: 12),
+                        _QuickAction(
+                          icon: Icons.medical_information_outlined,
+                          label: 'My\nReports',
+                          color: const Color(0xFF2E7D32),
+                          onTap: () => Navigator.pushNamed(context, '/reports'),
+                        ),
+                        const SizedBox(width: 12),
+                        _QuickAction(
+                          icon: Icons.emergency_outlined,
+                          label: 'Emergency',
+                          color: const Color(0xFFE65100),
+                          onTap: () => _showEmergency(context),
+                        ),
+                      ],
+                    ),
                   ),
                   const SizedBox(height: 24),
 
@@ -194,7 +209,7 @@ class HomeScreen extends StatelessWidget {
                     SectionHeader(
                       title: 'Upcoming Appointment',
                       actionLabel: 'View All',
-                      onAction: () {},
+                      onAction: () => Navigator.pushNamed(context, '/appointments'),
                     ),
                     const SizedBox(height: 14),
                     _UpcomingCard(appointment: upcoming.first),
@@ -212,9 +227,9 @@ class HomeScreen extends StatelessWidget {
                         doctor: d,
                         isFav: state.isFavorite(d),
                         onFav: () => state.toggleFavorite(d),
-                        onTap: () => Navigator.pushNamed(context, '/doctor', arguments: d),
+                        onTap: () => Navigator.pushNamed(context, '/doctor',
+                            arguments: d),
                       )),
-                  const SizedBox(height: 20),
                 ],
               ),
             ),
@@ -251,7 +266,8 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 8),
             OutlinedButton.icon(
               onPressed: () => Navigator.pop(ctx),
-              icon: const Icon(Icons.favorite_rounded, color: AppColors.primary),
+              icon:
+                  const Icon(Icons.favorite_rounded, color: AppColors.primary),
               label: const Text('Cardiac Helpline: 1800-HEART',
                   style: TextStyle(color: AppColors.primary)),
               style: OutlinedButton.styleFrom(
@@ -279,7 +295,10 @@ class _HealthMetricCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: (0.06)), blurRadius: 8, offset: const Offset(0, 3)),
+          BoxShadow(
+              color: Colors.black.withValues(alpha: (0.06)),
+              blurRadius: 8,
+              offset: const Offset(0, 3)),
         ],
       ),
       child: Column(
@@ -305,20 +324,26 @@ class _HealthMetricCard extends StatelessWidget {
                 ),
                 child: Text(metric.status,
                     style: const TextStyle(
-                        fontSize: 9, color: AppColors.success, fontWeight: FontWeight.w600)),
+                        fontSize: 9,
+                        color: AppColors.success,
+                        fontWeight: FontWeight.w600)),
               ),
             ],
           ),
           const Spacer(),
           Text(metric.value,
               style: const TextStyle(
-                  fontSize: 20, fontWeight: FontWeight.w700, color: AppColors.textDark)),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.textDark)),
           Text(metric.unit,
               style: const TextStyle(fontSize: 10, color: AppColors.textLight)),
           const SizedBox(height: 2),
           Text(metric.name,
               style: const TextStyle(
-                  fontSize: 11, color: AppColors.textMedium, fontWeight: FontWeight.w500)),
+                  fontSize: 11,
+                  color: AppColors.textMedium,
+                  fontWeight: FontWeight.w500)),
         ],
       ),
     );
@@ -378,6 +403,7 @@ class _UpcomingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(18),
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
           colors: [Color(0xFF8B0000), Color(0xFFB71C1C)],
@@ -406,23 +432,31 @@ class _UpcomingCard extends StatelessWidget {
               children: [
                 Text(appointment.doctor.name,
                     style: const TextStyle(
-                        color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600)),
                 Text(appointment.doctor.specialty,
-                    style: TextStyle(color: Colors.white.withValues(alpha: (0.7)), fontSize: 12)),
+                    style: TextStyle(
+                        color: Colors.white.withValues(alpha: (0.7)),
+                        fontSize: 12)),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.calendar_today_outlined, color: Colors.white70, size: 12),
+                    const Icon(Icons.calendar_today_outlined,
+                        color: Colors.white70, size: 12),
                     const SizedBox(width: 5),
                     Text(
                       '${appointment.date.day} ${_month(appointment.date.month)}',
-                      style: const TextStyle(color: Colors.white70, fontSize: 12),
+                      style:
+                          const TextStyle(color: Colors.white70, fontSize: 12),
                     ),
                     const SizedBox(width: 12),
-                    const Icon(Icons.access_time_outlined, color: Colors.white70, size: 12),
+                    const Icon(Icons.access_time_outlined,
+                        color: Colors.white70, size: 12),
                     const SizedBox(width: 5),
                     Text(appointment.timeSlot,
-                        style: const TextStyle(color: Colors.white70, fontSize: 12)),
+                        style: const TextStyle(
+                            color: Colors.white70, fontSize: 12)),
                   ],
                 ),
               ],
@@ -434,7 +468,8 @@ class _UpcomingCard extends StatelessWidget {
               color: Colors.white.withValues(alpha: (0.2)),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 18),
+            child: const Icon(Icons.arrow_forward_rounded,
+                color: Colors.white, size: 18),
           ),
         ],
       ),
@@ -442,8 +477,20 @@ class _UpcomingCard extends StatelessWidget {
   }
 
   String _month(int m) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     return months[m - 1];
   }
 }

@@ -30,10 +30,26 @@ class StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final (label, color, bg) = switch (status) {
-      AppointmentStatus.confirmed => ('Confirmed', AppColors.success, const Color(0xFFECFDF5)),
-      AppointmentStatus.pending => ('Pending', AppColors.warning, const Color(0xFFFFFBEB)),
-      AppointmentStatus.cancelled => ('Cancelled', Colors.red, const Color(0xFFFFF0F0)),
-      AppointmentStatus.completed => ('Completed', AppColors.info, const Color(0xFFEFF6FF)),
+      AppointmentStatus.confirmed => (
+          'Confirmed',
+          AppColors.success,
+          const Color(0xFFECFDF5)
+        ),
+      AppointmentStatus.pending => (
+          'Pending',
+          AppColors.warning,
+          const Color(0xFFFFFBEB)
+        ),
+      AppointmentStatus.cancelled => (
+          'Cancelled',
+          Colors.red,
+          const Color(0xFFFFF0F0)
+        ),
+      AppointmentStatus.completed => (
+          'Completed',
+          AppColors.info,
+          const Color(0xFFEFF6FF)
+        ),
     };
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 5),
@@ -42,7 +58,8 @@ class StatusBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
       ),
       child: Text(label,
-          style: TextStyle(color: color, fontSize: 12, fontWeight: FontWeight.w600)),
+          style: TextStyle(
+              color: color, fontSize: 12, fontWeight: FontWeight.w600)),
     );
   }
 }
@@ -64,7 +81,8 @@ class RatingStars extends StatelessWidget {
         } else if (i < rating) {
           return Icon(Icons.star_half_rounded, color: Colors.amber, size: size);
         }
-        return Icon(Icons.star_outline_rounded, color: Colors.grey[300], size: size);
+        return Icon(Icons.star_outline_rounded,
+            color: Colors.grey[300], size: size);
       }),
     );
   }
@@ -76,24 +94,32 @@ class SectionHeader extends StatelessWidget {
   final String? actionLabel;
   final VoidCallback? onAction;
 
-  const SectionHeader({super.key, required this.title, this.actionLabel, this.onAction});
+  const SectionHeader(
+      {super.key, required this.title, this.actionLabel, this.onAction});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(title,
-            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600,
-                color: AppColors.textDark)),
-        if (actionLabel != null)
-          GestureDetector(
-            onTap: onAction,
-            child: Text(actionLabel!,
-                style: const TextStyle(fontSize: 13, color: AppColors.primary,
-                    fontWeight: FontWeight.w500)),
-          ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(title,
+              style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textDark)),
+          if (actionLabel != null)
+            GestureDetector(
+              onTap: onAction,
+              child: Text(actionLabel!,
+                  style: const TextStyle(
+                      fontSize: 13,
+                      color: AppColors.primary,
+                      fontWeight: FontWeight.w500)),
+            ),
+        ],
+      ),
     );
   }
 }
@@ -118,7 +144,7 @@ class DoctorCard extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 12),
+        margin: const EdgeInsets.only(bottom: 12, left: 20, right: 20),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -159,17 +185,21 @@ class DoctorCard extends StatelessWidget {
                 children: [
                   Text(doctor.name,
                       style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.w600, color: AppColors.textDark)),
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: AppColors.textDark)),
                   const SizedBox(height: 2),
                   Text(doctor.specialty,
-                      style: const TextStyle(fontSize: 12, color: AppColors.primary)),
+                      style: const TextStyle(
+                          fontSize: 12, color: AppColors.primary)),
                   const SizedBox(height: 4),
                   Row(
                     children: [
                       RatingStars(rating: doctor.rating),
                       const SizedBox(width: 4),
                       Text('${doctor.rating} (${doctor.reviewCount})',
-                          style: const TextStyle(fontSize: 11, color: AppColors.textLight)),
+                          style: const TextStyle(
+                              fontSize: 11, color: AppColors.textLight)),
                     ],
                   ),
                   const SizedBox(height: 4),
@@ -180,7 +210,8 @@ class DoctorCard extends StatelessWidget {
                       const SizedBox(width: 4),
                       Expanded(
                         child: Text(doctor.hospital,
-                            style: const TextStyle(fontSize: 11, color: AppColors.textLight),
+                            style: const TextStyle(
+                                fontSize: 11, color: AppColors.textLight),
                             overflow: TextOverflow.ellipsis),
                       ),
                     ],
@@ -193,7 +224,9 @@ class DoctorCard extends StatelessWidget {
                 GestureDetector(
                   onTap: onFav,
                   child: Icon(
-                    isFav ? Icons.favorite_rounded : Icons.favorite_border_rounded,
+                    isFav
+                        ? Icons.favorite_rounded
+                        : Icons.favorite_border_rounded,
                     color: isFav ? AppColors.primary : AppColors.textLight,
                     size: 22,
                   ),
@@ -201,7 +234,9 @@ class DoctorCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Text('\$${doctor.consultationFee.toInt()}',
                     style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.primary)),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.primary)),
               ],
             ),
           ],
@@ -216,13 +251,18 @@ class CustomBottomNav extends StatelessWidget {
   final int currentIndex;
   final ValueChanged<int> onTap;
 
-  const CustomBottomNav({super.key, required this.currentIndex, required this.onTap});
+  const CustomBottomNav(
+      {super.key, required this.currentIndex, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final items = [
       (Icons.home_rounded, Icons.home_outlined, 'Home'),
-      (Icons.calendar_month_rounded, Icons.calendar_month_outlined, 'Appointments'),
+      (
+        Icons.calendar_month_rounded,
+        Icons.calendar_month_outlined,
+        'Appointments'
+      ),
       (Icons.bar_chart_rounded, Icons.bar_chart_outlined, 'Reports'),
       (Icons.person_rounded, Icons.person_outlined, 'Profile'),
     ];
@@ -230,7 +270,10 @@ class CustomBottomNav extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha: (0.08)), blurRadius: 20, offset: const Offset(0, -4)),
+          BoxShadow(
+              color: Colors.black.withValues(alpha: (0.08)),
+              blurRadius: 20,
+              offset: const Offset(0, -4)),
         ],
       ),
       child: SafeArea(
@@ -246,9 +289,12 @@ class CustomBottomNav extends StatelessWidget {
                 behavior: HitTestBehavior.opaque,
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 200),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   decoration: BoxDecoration(
-                    color: selected ? AppColors.primary.withValues(alpha: (0.1)) : Colors.transparent,
+                    color: selected
+                        ? AppColors.primary.withValues(alpha: (0.1))
+                        : Colors.transparent,
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(
@@ -256,7 +302,8 @@ class CustomBottomNav extends StatelessWidget {
                     children: [
                       Icon(
                         selected ? items[i].$1 : items[i].$2,
-                        color: selected ? AppColors.primary : AppColors.textLight,
+                        color:
+                            selected ? AppColors.primary : AppColors.textLight,
                         size: 24,
                       ),
                       const SizedBox(height: 4),
@@ -264,8 +311,11 @@ class CustomBottomNav extends StatelessWidget {
                         items[i].$3,
                         style: TextStyle(
                           fontSize: 10,
-                          fontWeight: selected ? FontWeight.w600 : FontWeight.w400,
-                          color: selected ? AppColors.primary : AppColors.textLight,
+                          fontWeight:
+                              selected ? FontWeight.w600 : FontWeight.w400,
+                          color: selected
+                              ? AppColors.primary
+                              : AppColors.textLight,
                         ),
                       ),
                     ],
@@ -355,10 +405,12 @@ class AppointmentCard extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                         side: const BorderSide(color: AppColors.primary),
                         foregroundColor: AppColors.primary,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.symmetric(vertical: 10),
                       ),
-                      child: const Text('Cancel', style: TextStyle(fontSize: 13)),
+                      child:
+                          const Text('Cancel', style: TextStyle(fontSize: 13)),
                     ),
                   ),
                   const SizedBox(width: 12),
@@ -368,11 +420,13 @@ class AppointmentCard extends StatelessWidget {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.primary,
                         foregroundColor: Colors.white,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10)),
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         elevation: 0,
                       ),
-                      child: const Text('View Details', style: TextStyle(fontSize: 13)),
+                      child: const Text('View Details',
+                          style: TextStyle(fontSize: 13)),
                     ),
                   ),
                 ],
@@ -389,14 +443,27 @@ class AppointmentCard extends StatelessWidget {
       children: [
         Icon(icon, size: 14, color: AppColors.textLight),
         const SizedBox(width: 5),
-        Text(text, style: const TextStyle(fontSize: 12, color: AppColors.textMedium)),
+        Text(text,
+            style: const TextStyle(fontSize: 12, color: AppColors.textMedium)),
       ],
     );
   }
 
   String _month(int m) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     return months[m - 1];
   }
 }
@@ -419,7 +486,9 @@ class ServiceTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withValues(alpha: (0.05)), blurRadius: 8, offset: const Offset(0, 3)),
+              color: Colors.black.withValues(alpha: (0.05)),
+              blurRadius: 8,
+              offset: const Offset(0, 3)),
         ],
       ),
       child: Row(
@@ -440,27 +509,41 @@ class ServiceTile extends StatelessWidget {
               children: [
                 Text(service.name,
                     style: const TextStyle(
-                        fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textDark)),
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.textDark)),
                 const SizedBox(height: 2),
                 Text(service.center,
-                    style: const TextStyle(fontSize: 11, color: AppColors.textLight)),
+                    style: const TextStyle(
+                        fontSize: 11, color: AppColors.textLight)),
                 const SizedBox(height: 4),
-                Row(
+                Column(
                   children: [
-                    const Icon(Icons.access_time_outlined, size: 11, color: AppColors.textLight),
-                    const SizedBox(width: 4),
-                    Text(service.timeSlot,
-                        style: const TextStyle(fontSize: 11, color: AppColors.textMedium)),
-                    const SizedBox(width: 10),
-                    Container(
-                      width: 4,
-                      height: 4,
-                      decoration: const BoxDecoration(
-                          color: AppColors.textLight, shape: BoxShape.circle),
+                    Row(
+                      children: [
+                        const Icon(Icons.access_time_outlined,
+                            size: 11, color: AppColors.textLight),
+                        const SizedBox(width: 4),
+                        Text(service.timeSlot,
+                            style: const TextStyle(
+                                fontSize: 11, color: AppColors.textMedium)),
+                      ],
                     ),
-                    const SizedBox(width: 6),
-                    Text('${service.slotsAvailable} Slots available',
-                        style: const TextStyle(fontSize: 11, color: AppColors.success)),
+                    Row(
+                      children: [
+                        Container(
+                          width: 4,
+                          height: 4,
+                          decoration: const BoxDecoration(
+                              color: AppColors.textLight,
+                              shape: BoxShape.circle),
+                        ),
+                        const SizedBox(width: 6),
+                        Text('${service.slotsAvailable} Slots available',
+                            style: const TextStyle(
+                                fontSize: 11, color: AppColors.success)),
+                      ],
+                    )
                   ],
                 ),
               ],
@@ -471,7 +554,9 @@ class ServiceTile extends StatelessWidget {
             children: [
               Text('\$${service.price.toInt()}',
                   style: const TextStyle(
-                      fontSize: 14, fontWeight: FontWeight.w700, color: AppColors.primary)),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      color: AppColors.primary)),
               const SizedBox(height: 6),
               GestureDetector(
                 onTap: onBook,
@@ -481,7 +566,8 @@ class ServiceTile extends StatelessWidget {
                     color: AppColors.primary,
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  child: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 16),
+                  child: const Icon(Icons.arrow_forward_rounded,
+                      color: Colors.white, size: 16),
                 ),
               ),
             ],

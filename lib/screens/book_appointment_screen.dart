@@ -111,13 +111,10 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SectionHeader(
-                    title: 'Available Services',
-                    actionLabel: 'Filter',
-                    onAction: () {},
-                  ),
+                SectionHeader(
+                  title: 'Available Services',
+                  actionLabel: 'Filter',
+                  onAction: () {},
                 ),
                 const SizedBox(height: 12),
                 Padding(
@@ -134,25 +131,19 @@ class _BookAppointmentScreenState extends State<BookAppointmentScreen> {
                 ),
                 const SizedBox(height: 24),
                 // Top doctors section
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: SectionHeader(
-                    title: 'Available Doctors',
-                    actionLabel: 'See All',
-                    onAction: () => Navigator.pushNamed(context, '/doctors'),
-                  ),
+                SectionHeader(
+                  title: 'Available Doctors',
+                  actionLabel: 'See All',
+                  onAction: () => Navigator.pushNamed(context, '/doctors'),
                 ),
                 const SizedBox(height: 12),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    children: AppData.doctors.map((d) => DoctorCard(
-                          doctor: d,
-                          isFav: state.isFavorite(d),
-                          onFav: () => state.toggleFavorite(d),
-                          onTap: () => Navigator.pushNamed(context, '/doctor', arguments: d),
-                        )).toList(),
-                  ),
+                Column(
+                  children: AppData.doctors.map((d) => DoctorCard(
+                        doctor: d,
+                        isFav: state.isFavorite(d),
+                        onFav: () => state.toggleFavorite(d),
+                        onTap: () => Navigator.pushNamed(context, '/doctor', arguments: d),
+                      )).toList(),
                 ),
                 const SizedBox(height: 30),
               ],

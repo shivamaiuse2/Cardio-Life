@@ -52,10 +52,12 @@ class AppointmentDetailScreen extends StatelessWidget {
                   Text(
                     '${appointment.date.day} ${_month(appointment.date.month)} ${appointment.date.year}',
                     style: const TextStyle(
-                        fontSize: 13, color: AppColors.textLight, fontWeight: FontWeight.w500),
+                        fontSize: 13,
+                        color: AppColors.textLight,
+                        fontWeight: FontWeight.w500),
                   ),
                   const SizedBox(height: 8),
-
+  
                   // Doctor card with large avatar
                   Container(
                     padding: const EdgeInsets.all(20),
@@ -94,9 +96,11 @@ class AppointmentDetailScreen extends StatelessWidget {
                                   color: AppColors.chipBg,
                                   borderRadius: BorderRadius.circular(6),
                                 ),
-                                child: Text('Appt ID: ${appointment.appointmentId}',
+                                child: Text(
+                                    'Appt ID: ${appointment.appointmentId}',
                                     style: const TextStyle(
-                                        fontSize: 11, color: AppColors.textMedium)),
+                                        fontSize: 11,
+                                        color: AppColors.textMedium)),
                               ),
                             ],
                           ),
@@ -152,20 +156,17 @@ class AppointmentDetailScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         Row(
                           children: [
-                            Expanded(
-                              child: _DateTimeBox(
-                                label: '${appointment.date.day} ${_month(appointment.date.month)} ${appointment.date.year}',
-                                sub: 'Date',
-                                icon: Icons.calendar_today_outlined,
-                              ),
+                            _DateTimeBox(
+                              label:
+                                  '${appointment.date.day} ${_month(appointment.date.month)} ${appointment.date.year}',
+                              sub: 'Date',
+                              icon: Icons.calendar_today_outlined,
                             ),
                             const SizedBox(width: 12),
-                            Expanded(
-                              child: _DateTimeBox(
-                                label: appointment.timeSlot,
-                                sub: 'Time',
-                                icon: Icons.access_time_outlined,
-                              ),
+                            _DateTimeBox(
+                              label: appointment.timeSlot,
+                              sub: 'Time',
+                              icon: Icons.access_time_outlined,
                             ),
                           ],
                         ),
@@ -232,10 +233,12 @@ class AppointmentDetailScreen extends StatelessWidget {
                             const SizedBox(width: 12),
                             Expanded(
                               child: _VisitTypeCard(
-                                label: appointment.type == AppointmentType.initialConsultation
+                                label: appointment.type ==
+                                        AppointmentType.initialConsultation
                                     ? 'Follow-up\nConsultation'
                                     : 'Initial\nConsultation',
-                                duration: appointment.type == AppointmentType.initialConsultation
+                                duration: appointment.type ==
+                                        AppointmentType.initialConsultation
                                     ? '20 min'
                                     : '30 min',
                                 isSelected: false,
@@ -265,7 +268,8 @@ class AppointmentDetailScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text('What to Expect',
-                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600)),
+                            style: TextStyle(
+                                fontSize: 14, fontWeight: FontWeight.w600)),
                         SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -320,12 +324,14 @@ class AppointmentDetailScreen extends StatelessWidget {
                                       color: AppColors.textDark)),
                               Text('every step of the way.',
                                   style: TextStyle(
-                                      fontSize: 12, color: AppColors.textMedium)),
+                                      fontSize: 12,
+                                      color: AppColors.textMedium)),
                             ],
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 6),
                           decoration: BoxDecoration(
                             color: AppColors.primary,
                             borderRadius: BorderRadius.circular(8),
@@ -349,7 +355,9 @@ class AppointmentDetailScreen extends StatelessWidget {
                         Expanded(
                           child: OutlinedButton.icon(
                             onPressed: () {
-                              context.read<AppState>().cancelAppointment(appointment.id);
+                              context
+                                  .read<AppState>()
+                                  .cancelAppointment(appointment.id);
                               Navigator.pop(context);
                             },
                             icon: const Icon(Icons.cancel_outlined, size: 18),
@@ -366,7 +374,9 @@ class AppointmentDetailScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: ElevatedButton.icon(
-                            onPressed: () {},
+                            onPressed: () => Navigator.pushNamed(
+                                context, '/doctor',
+                                arguments: appointment.doctor),
                             icon: const Icon(Icons.edit_outlined, size: 18),
                             label: const Text('Reschedule'),
                             style: ElevatedButton.styleFrom(
@@ -392,8 +402,20 @@ class AppointmentDetailScreen extends StatelessWidget {
   }
 
   String _month(int m) {
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Dec'
+    ];
     return months[m - 1];
   }
 }
@@ -403,7 +425,8 @@ class _DateTimeBox extends StatelessWidget {
   final String sub;
   final IconData icon;
 
-  const _DateTimeBox({required this.label, required this.sub, required this.icon});
+  const _DateTimeBox(
+      {required this.label, required this.sub, required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -422,9 +445,13 @@ class _DateTimeBox extends StatelessWidget {
             children: [
               Text(label,
                   style: const TextStyle(
-                      fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.textDark)),
+                      fontSize: 12,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textDark),
+                  overflow: TextOverflow.ellipsis),
               Text(sub,
-                  style: const TextStyle(fontSize: 10, color: AppColors.textLight)),
+                  style: const TextStyle(
+                      fontSize: 10, color: AppColors.textLight)),
             ],
           ),
         ],
@@ -452,7 +479,9 @@ class _VisitTypeCard extends StatelessWidget {
         color: isSelected ? AppColors.lightRed : AppColors.chipBg,
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-          color: isSelected ? AppColors.primary.withValues(alpha: (0.3)) : Colors.transparent,
+          color: isSelected
+              ? AppColors.primary.withValues(alpha: (0.3))
+              : Colors.transparent,
           width: 1.5,
         ),
       ),
@@ -472,7 +501,8 @@ class _VisitTypeCard extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
-                    color: isSelected ? AppColors.textDark : AppColors.textLight,
+                    color:
+                        isSelected ? AppColors.textDark : AppColors.textLight,
                   )),
               const Spacer(),
               Container(
@@ -481,7 +511,8 @@ class _VisitTypeCard extends StatelessWidget {
                   color: isSelected ? AppColors.primary : AppColors.textLight,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: const Icon(Icons.arrow_forward_rounded, color: Colors.white, size: 12),
+                child: const Icon(Icons.arrow_forward_rounded,
+                    color: Colors.white, size: 12),
               ),
             ],
           ),
@@ -496,7 +527,8 @@ class _ExpectItem extends StatelessWidget {
   final String label;
   final Color color;
 
-  const _ExpectItem({required this.icon, required this.label, required this.color});
+  const _ExpectItem(
+      {required this.icon, required this.label, required this.color});
 
   @override
   Widget build(BuildContext context) {
@@ -514,7 +546,8 @@ class _ExpectItem extends StatelessWidget {
         const SizedBox(height: 8),
         Text(label,
             textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 10, color: AppColors.textMedium, height: 1.4)),
+            style: const TextStyle(
+                fontSize: 10, color: AppColors.textMedium, height: 1.4)),
       ],
     );
   }

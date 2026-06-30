@@ -26,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
             actions: [
               IconButton(
                 icon: const Icon(Icons.edit_outlined, color: Colors.white),
-                onPressed: () {},
+                onPressed: () => Navigator.pushNamed(context, '/edit-profile'),
               ),
             ],
             flexibleSpace: FlexibleSpaceBar(
@@ -169,19 +169,53 @@ class ProfileScreen extends StatelessWidget {
                   _MenuSection(
                     title: 'Account',
                     items: [
-                      _MenuItem(icon: Icons.person_outline_rounded, label: 'Personal Information', onTap: () {}),
-                      _MenuItem(icon: Icons.favorite_border_rounded, label: 'Saved Doctors', badge: '${state.favorites.length}', onTap: () {}),
-                      _MenuItem(icon: Icons.notifications_none_rounded, label: 'Notifications', onTap: () {}),
-                      _MenuItem(icon: Icons.payment_outlined, label: 'Payment Methods', onTap: () {}),
+                      _MenuItem(
+                        icon: Icons.person_outline_rounded,
+                        label: 'Personal Information',
+                        onTap: () => Navigator.pushNamed(context, '/edit-profile'),
+                      ),
+                      _MenuItem(
+                        icon: Icons.favorite_border_rounded,
+                        label: 'Saved Doctors',
+                        badge: '${state.favorites.length}',
+                        onTap: () => Navigator.pushNamed(context, '/doctors'),
+                      ),
+                      _MenuItem(
+                        icon: Icons.notifications_none_rounded,
+                        label: 'Notifications',
+                        onTap: () => Navigator.pushNamed(context, '/notifications'),
+                      ),
+                      _MenuItem(
+                        icon: Icons.payment_outlined,
+                        label: 'Payment Methods',
+                        onTap: () {
+                          final appointment = state.appointments.isNotEmpty
+                              ? state.appointments.first
+                              : AppData.appointments.first;
+                          Navigator.pushNamed(context, '/payment', arguments: appointment);
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
                   _MenuSection(
                     title: 'Health',
                     items: [
-                      _MenuItem(icon: Icons.medical_information_outlined, label: 'Medical History', onTap: () {}),
-                      _MenuItem(icon: Icons.medication_outlined, label: 'Prescriptions', onTap: () {}),
-                      _MenuItem(icon: Icons.description_outlined, label: 'Lab Reports', onTap: () {}),
+                      _MenuItem(
+                        icon: Icons.medical_information_outlined,
+                        label: 'Medical History',
+                        onTap: () => Navigator.pushNamed(context, '/reports'),
+                      ),
+                      _MenuItem(
+                        icon: Icons.medication_outlined,
+                        label: 'Prescriptions',
+                        onTap: () => Navigator.pushNamed(context, '/reports'),
+                      ),
+                      _MenuItem(
+                        icon: Icons.description_outlined,
+                        label: 'Lab Reports',
+                        onTap: () => Navigator.pushNamed(context, '/reports'),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 16),
@@ -196,7 +230,7 @@ class ProfileScreen extends StatelessWidget {
                         label: 'Sign Out',
                         textColor: Colors.red,
                         onTap: () => Navigator.pushNamedAndRemoveUntil(
-                            context, '/', (r) => false),
+                            context, '/login', (r) => false),
                       ),
                     ],
                   ),

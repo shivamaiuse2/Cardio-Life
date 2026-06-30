@@ -22,6 +22,7 @@ class MainShell extends StatelessWidget {
     final state = context.watch<AppState>();
     return Scaffold(
       body: IndexedStack(
+        sizing: StackFit.expand,
         index: state.currentIndex,
         children: _screens,
       ),

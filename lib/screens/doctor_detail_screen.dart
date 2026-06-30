@@ -56,6 +56,10 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen>
                 onPressed: () => state.toggleFavorite(doctor),
               ),
               IconButton(
+                icon: const Icon(Icons.chat_bubble_outline_rounded, color: Colors.white),
+                onPressed: () => Navigator.pushNamed(context, '/chat', arguments: doctor),
+              ),
+              IconButton(
                 icon: const Icon(Icons.share_outlined, color: Colors.white),
                 onPressed: () {},
               ),
@@ -267,13 +271,12 @@ class _DoctorDetailScreenState extends State<DoctorDetailScreen>
       doctor: widget.doctor,
       date: _selectedDate,
       timeSlot: _selectedSlot!,
-      status: AppointmentStatus.confirmed,
+      status: AppointmentStatus.pending,
       type: _selectedType,
       appointmentId: 'CLM${DateTime.now().millisecondsSinceEpoch % 1000000}',
     );
     state.addAppointment(appointment);
-    Navigator.pushReplacementNamed(context, '/appointment-detail',
-        arguments: appointment);
+    Navigator.pushNamed(context, '/payment', arguments: appointment);
   }
 }
 

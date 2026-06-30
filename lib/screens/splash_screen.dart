@@ -213,7 +213,7 @@ class _SplashScreenState extends State<SplashScreen>
                                 Expanded(
                                   child: GestureDetector(
                                     onTap: () => Navigator.pushReplacementNamed(
-                                        context, '/home'),
+                                        context, '/onboarding'),
                                     child: Container(
                                       padding: const EdgeInsets.symmetric(vertical: 18),
                                       decoration: BoxDecoration(
