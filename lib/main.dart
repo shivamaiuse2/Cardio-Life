@@ -1,3 +1,4 @@
+import 'package:cardiolife/screens/forgot_password_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +57,8 @@ class CardioLifeApp extends StatelessWidget {
             return _route(const SignupScreen());
           case '/otp':
             return _route(const OtpScreen());
+          case '/forgot-password':
+            return _route(const ForgotPasswordScreen());
           case '/home':
             return _route(
               const MainShell(),

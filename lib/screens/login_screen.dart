@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.pushNamed(context, '/forgot-password'),
                   child: const Text('Forgot Password?',
                       style: TextStyle(color: AppColors.primary, fontSize: 13)),
                 ),
@@ -110,22 +110,22 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              Row(
+              const Row(
                 children: [
-                  const Expanded(child: Divider(color: AppColors.divider)),
+                  Expanded(child: Divider(color: AppColors.divider)),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
+                    padding: EdgeInsets.symmetric(horizontal: 12),
                     child: Text('or continue with',
                         style: TextStyle(color: AppColors.textLight, fontSize: 12)),
                   ),
-                  const Expanded(child: Divider(color: AppColors.divider)),
+                  Expanded(child: Divider(color: AppColors.divider)),
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
+              const Row(
                 children: [
                   Expanded(child: _SocialButton(icon: Icons.g_mobiledata_rounded, label: 'Google')),
-                  const SizedBox(width: 12),
+                  SizedBox(width: 12),
                   Expanded(child: _SocialButton(icon: Icons.apple_rounded, label: 'Apple')),
                 ],
               ),
